@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View คำนำหน้า -->
+    <record id="view_title_form" model="ir.ui.view">
+        <field name="name">student.title.form</field>
+        <field name="model">student.title</field>
+        <field name="arch" type="xml">
+            <form string="คำนำหน้า">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View คำนำหน้า -->
+    <record id="view_title_tree" model="ir.ui.view">
+        <field name="name">student.title.tree</field>
+        <field name="model">student.title</field>
+        <field name="arch" type="xml">
+            <tree string="คำนำหน้า">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action คำนำหน้า -->
+    <record id="action_title" model="ir.actions.act_window">
+        <field name="name">คำนำหน้า</field>
+        <field name="res_model">student.title</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

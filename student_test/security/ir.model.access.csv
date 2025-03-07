@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_title,access.student.title,model_student_title,base.group_user,1,1,1,1
+access_student_student,access.student.student,model_student_student,base.group_user,1,1,1,1
+access_teacher,access.teacher,model_student_test_teacher,base.group_user,1,1,1,1
+access_base_data,access.base_data,model_student_test_base_data,base.group_user,1,1,1,1
+access_teacher_address,access.teacher.address,model_student_test_teacher_address,base.group_user,1,1,1,1
+access_training_history,access.training.history,model_student_test_training_history,base.group_user,1,1,1,1
+access_mdm_province,access.mdm.province,model_mdm_province,base.group_user,1,1,1,1
+access_mdm_district,access.mdm.district,model_mdm_district,base.group_user,1,1,1,1
+access_mdm_sub_district,access.mdm.sub.district,model_mdm_sub_district,base.group_user,1,1,1,1
+access_mdm_postcode,access.mdm.postcode,model_mdm_postcode,base.group_user,1,1,1,1
+access_student_student,student.student student,model_student_student,group_student,1,0,0,0
+access_student_teacher,student.student teacher,model_student_student,group_teacher,1,1,0,0
+editaccess_student_teacheredit,student.student teacher,model_student_student,group_teacher,1,1,1,0

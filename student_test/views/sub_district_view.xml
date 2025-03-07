@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Sub-District Views -->
+        <record id="view_sub_district_form" model="ir.ui.view">
+            <field name="name">mdm.sub.district.form</field>
+            <field name="model">mdm.sub.district</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="province_id"/>
+                            <field name="sub_district_code"/>
+                            <field name="sub_district_name_eng"/>
+                        </group>
+                        <group>
+                            <field name="district_id"/>
+                            <field name="sub_district_name_tha"/>
+                            <field name="postcode"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_sub_district_tree" model="ir.ui.view">
+            <field name="name">mdm.sub.district.tree</field>
+            <field name="model">mdm.sub.district</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="province_id"/>
+                    <field name="district_id"/>
+                    <field name="sub_district_code"/>
+                    <field name="sub_district_name_tha"/>
+                    <field name="sub_district_name_eng"/>
+                    <field name="postcode"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Sub-District Window Action -->
+        <record id="action_sub_district" model="ir.actions.act_window">
+            <field name="name">ตำบล</field>
+            <field name="res_model">mdm.sub.district</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_sub_district_tree"/>
+            <field name="search_view_id" ref="view_sub_district_tree"/>
+        </record>
+
+        <!-- Sub-District Menu -->
+        <menuitem id="base_address_menu" name="ข้อมูลพื้นฐาน" sequence="1"/>
+        <menuitem id="sub_district_menu" parent="base_address_menu" name="ตำบล"
+                  action="action_sub_district" sequence="3"/>
+
+    </data>
+</odoo>

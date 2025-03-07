@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View สำหรับนักเรียน -->
+    <record id="view_student_form" model="ir.ui.view">
+        <field name="name">student.student.form</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <form string="นักเรียน">
+                <header>
+                    <button name="button_done" string="Done" class="oe_highlight" type="object"/>
+                    <button name="button_reset" string="Reset to Draft" states="done,cancel" class="oe_highlight" type="object"/>
+                    <button name="button_cancel" string="Cancel" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <field name="photo" widget="image" class="oe_left oe_avatar"/>
+                    <div class="oe_title">
+                        <h3>
+                            <field name="name"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="level_education"/>
+                        </group>
+                        <group>
+                            <field name="birthdate"/>
+                            <field name="student_blood_group"/>
+                            <field name="nationality"/>
+                        </group>
+                    </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View สำหรับนักเรียน -->
+    <record id="view_student_tree" model="ir.ui.view">
+        <field name="name">student.student.tree</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <tree string="นักเรียน">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="birthdate"/>
+                <field name="level_education"/>
+                <field name="student_blood_group"/>
+                <field name="nationality"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View สำหรับนักเรียน -->
+    <record id="view_student_search" model="ir.ui.view">
+        <field name="name">student.student.search</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <search string="Search Student">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="nationality"/>
+                <filter string="Male" name="male" domain="[('gender','=','male')]"
+                        help="Students with gender as Male"/>
+                <filter string="Female" name="female" domain="[('gender','=','female')]"
+                        help="Students with gender as Female"/>
+                <filter string="Others" name="others" domain="[('gender','=','others')]"
+                        help="Students with gender as Others"/>
+                <group expand="1" string="Group By">
+                    <filter string="Nationality" name="nationality" context="{'group_by':'nationality'}"/>
+                    <filter string="Blood Group" name="blood_group" context="{'group_by':'student_blood_group'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- Action สำหรับนักเรียน -->
+    <record id="action_student" model="ir.actions.act_window">
+        <field name="name">นักเรียน</field>
+        <field name="res_model">student.student</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_student_search"/>
+    </record>
+
+</odoo>
