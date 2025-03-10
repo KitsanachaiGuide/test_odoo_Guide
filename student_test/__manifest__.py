@@ -13,8 +13,8 @@
     'author': 'Your Name',
     'depends': ['base', 'mail', 'sale_management'],
     'data': [
-        'security/groups.xml',
         'security/ir.model.access.csv',
+        'security/groups.xml',
         'views/title_view.xml',
         'views/student_view.xml',
         'views/teacher_action.xml',

@@ -17,11 +17,52 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+
+        <record id="view_teacher_address_tree" model="ir.ui.view">
+            <field name="name">teacher.address.tree</field>
+            <field name="model">student_test.teacher_address</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="province_id"/>
+                    <field name="district_id"/>
+                    <field name="subdistrict_id"/>
+                    <field name="postal_code"/>
+                    <field name="subject_ids"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_teacher_address_form" model="ir.ui.view">
+        <field name="name">teacher.address.form</field>
+        <field name="model">student_test.teacher_address</field>
+        <field name="arch" type="xml">
+            <form string="ข้อมูลที่อยู่ครู">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="province_id"/>
+                        <field name="district_id"/>
+                        <field name="subdistrict_id"/>
+                        <field name="postal_code"/>
+                        <field name="subject_ids"/>
+                        <field name="datates_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
     <record id="action_teacher_address" model="ir.actions.act_window">
-        <field name="name">ที่อยู่ครูและนักเรียน</field>
+        <field name="name">ข้อมูลของคุณครู</field>
         <field name="res_model">student_test.teacher_address</field>
         <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_teacher_address_tree"/>
     </record>
+
 
     <record id="action_training_history" model="ir.actions.act_window">
         <field name="name">ประวัติการอบรม</field>

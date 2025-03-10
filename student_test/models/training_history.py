@@ -5,5 +5,6 @@ class TrainingHistory(models.Model):
     _description = 'ประวัติการอบรมของนักเรียน'
 
     name = fields.Char(string="ชื่อการอบรม")
-    student_name = fields.Char(string="ชื่อนักเรียน")
+    student_id = fields.Many2one('student.student', string="ชื่อนักเรียน")
+    teacher_id = fields.Many2one('res.users', string="ครู")
     date = fields.Date(string="วันที่อบรม")

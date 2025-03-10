@@ -10,6 +10,8 @@ class TeacherAddress(models.Model):
     subdistrict_id = fields.Many2one('mdm.sub.district', string="ตำบล", required=True, domain="[('district_id', '=', district_id)]", ondelete='cascade')
     postal_code = fields.Many2one('mdm.postcode', string="รหัสไปรษณีย์", required=True, ondelete='cascade')
 
+    subject_ids = fields.Many2one('student_test.subject', string="วิชาที่สอน")
+
     @api.onchange('subdistrict_id')
     def onchange_subdistrict_id(self):
         for rec in self:

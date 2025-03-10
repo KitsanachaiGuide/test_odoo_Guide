@@ -25,9 +25,10 @@ class Student(models.Model):
     level_education = fields.Selection([
         ('kinder_garden', 'Kindergarten'),
         ('primary', 'Primary'),
-        ('secondary', 'Secondary')
+        ('secondary', 'Secondary'),
+        ('high_school', 'High School'),
+        ('university', 'University')
     ], compute="_compute_level_education", store=True)
-
     active = fields.Boolean(string='เปิดใช้งาน', default=True)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -53,15 +54,19 @@ class Student(models.Model):
 
     @api.depends('age')
     def _compute_level_education(self):
-        for record in self:  # แก้ไขจาก ensure_one() เป็น loop เพื่อให้ทำงานกับหลายเรคอร์ด
+        for record in self:
             if record.age < 1:
-                record.level_education = "kinder_garden"
-            elif (record.age >= 1) and (record.age < 2):
-                record.level_education = "kinder_garden"
-            elif (record.age >= 2) and (record.age < 10):
-                record.level_education = "primary"
+                record.level_education = 'kinder_garden'
+            elif 1 <= record.age < 10:
+                record.level_education = 'primary'
+            elif 10 <= record.age < 15:
+                record.level_education = 'secondary'
+            elif 15 <= record.age < 18:
+                record.level_education = 'high_school'
+            elif 18 <= record.age <= 20:
+                record.level_education = 'university'
             else:
-                record.level_education = "--"
+                record.level_education = 'Empty Value'
 
     def button_done(self):
         for rec in self:

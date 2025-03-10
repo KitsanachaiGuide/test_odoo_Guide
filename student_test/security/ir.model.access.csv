@@ -9,6 +9,7 @@ access_mdm_province,access.mdm.province,model_mdm_province,base.group_user,1,1,1
 access_mdm_district,access.mdm.district,model_mdm_district,base.group_user,1,1,1,1
 access_mdm_sub_district,access.mdm.sub.district,model_mdm_sub_district,base.group_user,1,1,1,1
 access_mdm_postcode,access.mdm.postcode,model_mdm_postcode,base.group_user,1,1,1,1
-access_student_student,student.student student,model_student_student,group_student,1,0,0,0
-access_student_teacher,student.student teacher,model_student_student,group_teacher,1,1,0,0
-editaccess_student_teacheredit,student.student teacher,model_student_student,group_teacher,1,1,1,0
+access_student_student,student.student student,model_student_student,group_student,1,1,1,0
+access_student_teacher,student.student teacher,model_student_student,group_teacher,1,1,1,0
+access_teacher_address_teacher,student_test.teacher_address teacher,model_student_test_teacher_address,group_teacher,1,1,1,0
+access_student_test_subject,access_subject,model_student_test_subject,base.group_user,1,1,1,1

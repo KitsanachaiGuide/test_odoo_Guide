@@ -14,13 +14,16 @@
                 </header>
                 <sheet>
                     <field name="photo" widget="image" class="oe_left oe_avatar"/>
-                    <div class="oe_title">
-                        <h3>
-                            <field name="name"/>
-                        </h3>
-                    </div>
+<!--                    <div class="oe_title">-->
+<!--                        <label for="name" class="oe_edit_only"/>-->
+<!--                            &lt;!&ndash; เพิ่มฟิลด์ title_id ไว้ก่อนชื่อ &ndash;&gt;-->
+<!--                            <field name="title_id" options="{'no_create': True, 'no_open': True}" string="คำนำหน้า"/>-->
+<!--                            -->
+<!--                    </div>-->
                     <group>
                         <group>
+                            <field name="title_id" options="{'no_create': True, 'no_open': True}" string="คำนำหน้า"/>
+                            <field name="name" placeholder="ชื่อนักเรียน"/>
                             <field name="age"/>
                             <field name="gender"/>
                             <field name="level_education"/>
@@ -48,6 +51,7 @@
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <tree string="นักเรียน">
+                <field name="title_id"/>
                 <field name="name"/>
                 <field name="age"/>
                 <field name="gender"/>
@@ -55,6 +59,7 @@
                 <field name="level_education"/>
                 <field name="student_blood_group"/>
                 <field name="nationality"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -81,7 +86,6 @@
             </search>
         </field>
     </record>
-
 
     <!-- Action สำหรับนักเรียน -->
     <record id="action_student" model="ir.actions.act_window">
