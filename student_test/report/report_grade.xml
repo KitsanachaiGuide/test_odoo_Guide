@@ -1,0 +1,38 @@
+<odoo>
+    <report
+        id="report_grade_pdf"
+        model="student_test.grade"
+        string="Grade Report"
+        report_type="qweb-pdf"
+        name="student_test.report_simple_grade_template"
+        file="student_test.report_simple_grade_template"
+        attachment_use="False"/>
+
+        <template id="report_simple_grade_template">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <h2>Simple Grade Report</h2>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Teacher</th>
+                            <th>Subject</th>
+                            <th>Mark</th>
+                            <th>Grade</th>
+                            <th>Comments</th>
+                        </tr>
+                        <!-- Loop over the records to display dynamic data -->
+                        <tr t-foreach="docs" t-as="doc">
+                            <td><t t-esc="doc.student_id.name"/></td>
+                            <td><t t-esc="doc.teacher_id.name"/></td>
+                            <td><t t-esc="doc.subject_id.name"/></td>
+                            <td><t t-esc="doc.mark"/></td>
+                            <td><t t-esc="doc.grade"/></td>
+                            <td><t t-esc="doc.comments"/></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </t>
+        </template>
+</odoo>

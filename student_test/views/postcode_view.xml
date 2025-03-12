@@ -45,9 +45,9 @@
         </record>
 
         <!-- Postal Code Menu -->
-        <menuitem id="base_address_menu" name="ข้อมูลพื้นฐาน" sequence="1"/>
+        <menuitem id="base_address_menu" name="ข้อมูลพื้นฐาน" sequence="1" groups="group_custom_admin"/>
         <menuitem id="postcode_menu" parent="base_address_menu" name="รหัสไปรษณีย์"
-                  action="action_postcode" sequence="4"/>
+                  action="action_postcode" sequence="4" groups="group_custom_admin"/>
 
     </data>
 </odoo>

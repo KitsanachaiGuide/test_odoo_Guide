@@ -13,3 +13,10 @@ access_student_student,student.student student,model_student_student,group_stude
 access_student_teacher,student.student teacher,model_student_student,group_teacher,1,1,1,0
 access_teacher_address_teacher,student_test.teacher_address teacher,model_student_test_teacher_address,group_teacher,1,1,1,0
 access_student_test_subject,access_subject,model_student_test_subject,base.group_user,1,1,1,1
+
+
+access_student_test_grade1,access.student_test.grade1,model_student_test_grade,student_test.group_student,1,0,0,0
+access_student_test_grade_teacher,access.teacher_group.grade,model_student_test_grade,student_test.group_teacher,1,1,1,1
+access_subject_unit,access.subject.unit,model_subject_unit,,1,1,1,1
+
+

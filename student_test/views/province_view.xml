@@ -43,9 +43,9 @@
         </record>
 
         <!-- Province Menu -->
-        <menuitem id="base_address_menu" name="ข้อมูลพื้นฐาน" sequence="1"/>
+        <menuitem id="base_address_menu" name="ข้อมูลพื้นฐาน" sequence="1" groups="group_custom_admin"/>
         <menuitem id="province_menu" parent="base_address_menu" name="จังหวัด"
-                  action="action_province" sequence="1"/>
+                  action="action_province" sequence="1" groups="group_custom_admin"/>
 
     </data>
 </odoo>

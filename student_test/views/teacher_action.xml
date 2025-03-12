@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Action สำหรับแสดงข้อมูลครูผู้สอน -->
-    <record id="action_teacher" model="ir.actions.act_window">
-        <field name="name">ข้อมูลครูผู้สอน</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">student_test.teacher</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p>คลิก "สร้าง" เพื่อเพิ่มข้อมูลครูผู้สอนใหม่</p>
-        </field>
-    </record>
 
-    <record id="action_base_data" model="ir.actions.act_window">
-        <field name="name">ข้อมูลพื้นฐาน</field>
-        <field name="res_model">student_test.base_data</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+
 
 
         <record id="view_teacher_address_tree" model="ir.ui.view">
@@ -35,24 +22,125 @@
 
 
         <record id="view_teacher_address_form" model="ir.ui.view">
-        <field name="name">teacher.address.form</field>
-        <field name="model">student_test.teacher_address</field>
+            <field name="name">teacher.address.form</field>
+            <field name="model">student_test.teacher_address</field>
+            <field name="arch" type="xml">
+                <form string="ข้อมูลที่อยู่ครู">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="province_id"/>
+                            <field name="district_id"/>
+                            <field name="subdistrict_id"/>
+                            <field name="postal_code"/>
+                        </group>
+
+                        <group>
+                            <!-- ฟิลด์ Many2many ของวิชาที่ครูสอน -->
+                            <field name="subject_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+
+                            <!-- ฟิลด์ Many2many ของนักเรียนที่ครูดูแล -->
+                            <field name="student_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="level_education"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+    <record id="view_grade_tree" model="ir.ui.view">
+        <field name="name">grade.tree</field>
+        <field name="model">student_test.grade</field>
         <field name="arch" type="xml">
-            <form string="ข้อมูลที่อยู่ครู">
+            <tree string="เกรดของนักเรียน">
+                <field name="teacher_id"/>
+                <field name="student_id"/>
+                <field name="subject_id"/>
+                <field name="mark"/>
+                <field name="grade"/>
+
+            </tree>
+        </field>
+    </record>
+
+<!--   <record id="action_print_report_multiple" model="ir.actions.server">-->
+<!--    <field name="name">Print Multiple Reports</field>-->
+<!--    <field name="model_id" ref="model_student_test_grade"/>-->
+<!--    <field name="state">code</field>-->
+<!--    <field name="code">-->
+<!--        <![CDATA[-->
+<!--        # Get the selected records from the tree view (using active_ids)-->
+<!--        records = env['student_test.grade'].browse(context.get('active_ids'))-->
+
+<!--        # Call the report for the selected records-->
+<!--        return records.env.ref('student_test.report_grade_pdf').report_action(records)-->
+<!--        ]]>-->
+<!--    </field>-->
+<!--</record>-->
+
+
+
+
+    <record id="view_grade_form_give" model="ir.ui.view">
+        <field name="name">grade.form</field>
+        <field name="model">student_test.grade</field>
+        <field name="arch" type="xml">
+            <form string="กรอกคะแนนของนักเรียน">
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="province_id"/>
-                        <field name="district_id"/>
-                        <field name="subdistrict_id"/>
-                        <field name="postal_code"/>
-                        <field name="subject_ids"/>
-                        <field name="datates_ids"/>
+                        <field name="teacher_id"
+                        options="{'no_create': True, 'no_open': True}"/>
+                        <field name="student_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="subject_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="mark"/>
+                        <field name="grade" />
+                        <field name="comments"/>
                     </group>
+                    <footer>
+                        <button name="action_print_report" type="object" string="Print" class="btn-primary"/>
+                    </footer>
                 </sheet>
             </form>
         </field>
     </record>
+
+
+    <record id="action_teacher" model="ir.actions.act_window">
+        <field name="name">ข้อมูลครูผู้สอน</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">student_test.teacher</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>คลิก "สร้าง" เพื่อเพิ่มข้อมูลครูผู้สอนใหม่</p>
+        </field>
+    </record>
+
+    <record id="action_base_data" model="ir.actions.act_window">
+        <field name="name">ข้อมูลพื้นฐาน</field>
+        <field name="res_model">student_test.base_data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="action_grades" model="ir.actions.act_window">
+        <field name="name">ข้อมูลเกรดนักเรียน</field>
+        <field name="res_model">student_test.grade</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_grade_tree"/>
+    </record>
+
+
 
 
 
@@ -69,7 +157,5 @@
         <field name="res_model">student_test.training_history</field>
         <field name="view_mode">tree,form</field>
     </record>
-
-
 
 </odoo>

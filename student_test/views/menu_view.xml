@@ -20,6 +20,13 @@
               groups="group_student,group_teacher"
               sequence="10"/>
 
+    <menuitem id="menu_student_grades"
+              name="ข้อมูลเกรดของนักเรียน"
+              parent="menu_student_main"
+              action="action_student_grades"
+              groups="group_student"
+              sequence="50"/>
+
     <!-- เมนูหลักของครู -->
     <menuitem id="menu_teacher_root"
               name="ครูผู้สอน"
@@ -37,7 +44,21 @@
               parent="menu_teacher_main"
               action="action_teacher_address"
               groups="group_teacher"
-              sequence="10"/>
+              sequence="11"/>
+
+
+    <menuitem id="menu_teacher_grades"
+              name="ข้อมูลเกรดและการให้เกรด"
+              groups="group_teacher"
+              sequence="30"/>
+
+    <menuitem id="menu_grades_give"
+              name="ให้เกรดนักเรียน"
+              parent="menu_teacher_grades"
+              action="action_grades"
+              groups="group_teacher"
+              sequence="40"/>
+
 
     <!-- เมนูสำหรับการอบรม -->
     <menuitem id="menu_teacher_training"
@@ -51,14 +72,37 @@
     <menuitem id="menu_student_config"
               name="ตั้งค่า"
               parent="menu_student_root"
+              groups="group_custom_admin"
               sequence="100"/>
 
     <menuitem id="menu_title"
               name="คำนำหน้า"
               parent="menu_student_config"
               action="action_title"
-              groups="group_student"
+              groups="group_custom_admin"
+              sequence="101"/>
+
+
+
+    <menuitem id="menu_subject"
+              name="วิชาเรียน"
               sequence="10"/>
+
+    <menuitem id="menu_subject_list"
+              name="รายการวิชาที่สอน"
+              parent="menu_subject"
+              action="action_subject_tree"
+              sequence="1"/>
+
+
+<!--    <menuitem id="menu_print_multiple_reports"-->
+<!--          name="Print Selected Grades"-->
+<!--          parent="student_test.menu_student_main"-->
+<!--          action="action_print_report_multiple"-->
+<!--          groups="group_student"-->
+<!--    />-->
+
+
 
     <record id="menu_administration_inherited" model="ir.ui.menu">
         <field name="name">Settings</field>

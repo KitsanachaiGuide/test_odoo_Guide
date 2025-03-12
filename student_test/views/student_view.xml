@@ -9,7 +9,7 @@
                 <header>
                     <button name="button_done" string="Done" class="oe_highlight" type="object"/>
                     <button name="button_reset" string="Reset to Draft" states="done,cancel" class="oe_highlight" type="object"/>
-                    <button name="button_cancel" string="Cancel" type="object"/>
+                    <button name="button_cancel" string="Cancel" type="object" class="oe_link"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
                 </header>
                 <sheet>
@@ -85,6 +85,30 @@
                 </group>
             </search>
         </field>
+    </record>
+
+
+    <record id="view_grade_tree_student" model="ir.ui.view">
+        <field name="name">grade.tree.student</field>
+        <field name="model">student_test.grade</field>
+        <field name="arch" type="xml">
+            <tree string="เกรดของนักเรียน">
+                <field name="subject_id"/>
+                <field name="teacher_id"/>
+                <field name="grade"/>
+                <field name="comments"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <!-- Action สำหรับนักเรียนดูเกรดของตัวเอง -->
+    <record id="action_student_grades" model="ir.actions.act_window">
+        <field name="name">ข้อมูลเกรดของนักเรียน</field>
+        <field name="res_model">student_test.grade</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_grade_tree_student"/>
     </record>
 
     <!-- Action สำหรับนักเรียน -->

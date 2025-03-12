@@ -10,3 +10,5 @@ from . import mdm_sub_district
 from . import mdm_postcode
 from . import sale_order
 from . import subject
+from . import Grade
+from . import subject_unit

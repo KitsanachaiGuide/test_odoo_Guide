@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from datetime import date
+from odoo.exceptions import ValidationError
 
 
 class Student(models.Model):
@@ -29,6 +30,9 @@ class Student(models.Model):
         ('high_school', 'High School'),
         ('university', 'University')
     ], compute="_compute_level_education", store=True)
+
+    user_id = fields.Many2one('res.users', string="User", default=lambda self: self.env.user, readonly=True)
+
     active = fields.Boolean(string='เปิดใช้งาน', default=True)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -80,38 +84,10 @@ class Student(models.Model):
         for rec in self:
             rec.write({'state': 'cancel'})
 
-
-# from odoo import models, fields, api
-# from datetime import date
-#
-# class Student(models.Model):
-#     _name = 'student.student'
-#     _description = 'ข้อมูลนักเรียน'
-#
-#     name = fields.Char(string='ชื่อ', required=True)
-#     title_id = fields.Many2one('student.title', string='คำนำหน้า')
-#     birthdate = fields.Date(string='วันเกิด')
-#     age = fields.Integer(string='อายุ', compute='_compute_age', store=True)
-#     active = fields.Boolean(string='เปิดใช้งาน', default=True)
-#
-#     _sql_constraints = [
-#         ('name_unique', 'UNIQUE(name)', 'ชื่อนักเรียนนี้มีอยู่ในระบบแล้ว กรุณาใช้ชื่ออื่น!'),
-#     ]
-#
-#     @api.depends('birthdate')
-#     def _compute_age(self):
-#         for record in self:
-#             if record.birthdate:
-#                 today = date.today()
-#                 born = record.birthdate
-#                 record.age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
-#             else:
-#                 record.age = 0
-#
-#     @api.constrains('name')
-#     def _check_unique_name(self):
-#         for record in self:
-#             domain = [('name', '=', record.name), ('id', '!=', record.id)]
-#             count = self.search_count(domain)
-#             if count > 0:
-#                 raise ValidationError(_('ชื่อนักเรียน "%s" มีอยู่ในระบบแล้ว!') % record.name)
+    @api.model
+    def create(self, vals):
+        """ Prevent users from creating more than one student record """
+        existing_student = self.search([('user_id', '=', self.env.uid)], limit=1)
+        if existing_student:
+            raise ValidationError("You can only create one student record.")
+        return super(Student, self).create(vals)
